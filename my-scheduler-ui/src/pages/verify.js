@@ -7,7 +7,7 @@ export default function VerifyEmail() {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const resendVerification = async () => {
         try {
-            await axios.get(`${baseUrl}/api/Auth/resend-verification`, { email });
+            await axios.post(`${baseUrl}/api/Auth/resend-verification?Email=${email}`);
             setMessage("Verification email sent. Please check your inbox.");
         } catch (err) {
             setMessage(err.response?.data || "Failed to resend.");
