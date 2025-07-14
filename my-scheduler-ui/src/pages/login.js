@@ -10,11 +10,12 @@ export default function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post('https://localhost:7177/api/Auth/login', {
+            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/Auth/login`, {
                 email,
                 password,
             })
-            alert('Logged in! JWT: ' + res.data)
+            alert('Logged in!')
+            localStorage.setItem('token', res?.bearerFormat);
             setError(null)
         } catch (err) {
             setError(err.response?.data || 'Login failed')

@@ -18,7 +18,7 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('https://localhost:7177/api/Auth/signup', form)
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/Auth/signup`, form)
             alert('Signed up successfully! Please verify your email.')
             router.push('/verify')
         } catch (err) {
