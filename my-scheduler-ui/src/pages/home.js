@@ -8,7 +8,6 @@ export default function HomePage() {
         const token = localStorage.getItem('token');
         if (token) {
             const decoded = jwtDecode(token);
-            debugger;
             const name = decoded?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]; // or decoded.sub / decoded.email etc.
             setName(name);
         }
