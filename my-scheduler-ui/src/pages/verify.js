@@ -7,7 +7,7 @@ export default function VerifyEmail() {
 
   const resendVerification = async () => {
     try {
-      await axios.post("http://localhost:7177/api/auth/resend-verification", { email });
+      await axios.get("https://localhost:7177/api/Auth/resend-verification", { email });
       setMessage("Verification email sent. Please check your inbox.");
     } catch (err) {
       setMessage(err.response?.data || "Failed to resend.");
