@@ -20,7 +20,7 @@ export default function Signup() {
         try {
             await axios.post('https://localhost:7177/api/Auth/signup', form)
             alert('Signed up successfully! Please verify your email.')
-            router.push('/login')
+            router.push('/verify')
         } catch (err) {
             setError(err?.response?.data || 'Something went wrong')
         }
