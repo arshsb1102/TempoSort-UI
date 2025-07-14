@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 
 export default function Signup() {
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const [form, setForm] = useState({ name: '', email: '', password: '' })
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +19,7 @@ export default function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/Auth/signup`, form)
+            await axios.post(`${baseUrl}/api/Auth/signup`, form)
             alert('Signed up successfully! Please verify your email.')
             router.push('/verify')
         } catch (err) {

@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/router';
 
 export default function LoginPage() {
+    const router = useRouter();
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL;
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
@@ -10,12 +13,13 @@ export default function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/Auth/login`, {
+            const res = await axios.post(`${baseUrl}/api/Auth/login`, {
                 email,
                 password,
-            })
-            alert('Logged in!')
-            localStorage.setItem('token', res?.bearerFormat);
+            });
+            localStorage.setItem('bearer', res?.data?.bearerFormat);
+            localStorage.setItem('token', res?.data?.token);
+            router.push('/home');
             setError(null)
         } catch (err) {
             setError(err.response?.data || 'Login failed')

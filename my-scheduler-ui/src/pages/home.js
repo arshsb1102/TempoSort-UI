@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
+import { jwtDecode } from "jwt-decode";
 
 export default function HomePage() {
-  const [name, setName] = useState('');
+    const [name, setName] = useState('');
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      setName(payload.name);
-    }
-  }, []);
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const decoded = jwtDecode(token);
+            debugger;
+            const name = decoded?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]; // or decoded.sub / decoded.email etc.
+            setName(name);
+        }
+    }, []);
 
-  return (
-    <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
-      Hi {name || 'there'} 👋
-    </div>
-  );
+    return (
+        <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
+            Hi {name || 'there'} 👋
+        </div>
+    );
 }
