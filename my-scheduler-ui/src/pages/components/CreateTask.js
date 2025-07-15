@@ -102,9 +102,10 @@ const CreateTask = () => {
                                     onChange={handleChange}
                                     className="w-full border p-2 rounded"
                                 >
-                                    <option value={0}>Low</option>
-                                    <option value={1}>Medium</option>
-                                    <option value={2}>High</option>
+                                    <option value={0}>Urgent</option>
+                                    <option value={1}>Important</option>
+                                    <option value={2}>Normal</option>
+                                    <option value={3}>Suggestive</option>
                                 </select>
                                 {error && <div className="text-red-500 text-sm">{error}</div>}
                                 <button

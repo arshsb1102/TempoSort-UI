@@ -81,7 +81,7 @@ const TaskList = () => {
                             Due: {new Date(task.dueAt).toLocaleString()}
                         </p>
                         <p className="text-sm text-gray-500">
-                            Priority: {["Low", "Medium", "High"][task.priority]}
+                            Priority: {["Urgent", "Important", "Normal", "Suggestive"][task.priority]}
                         </p>
                         <div className="mt-4 flex gap-2">
                             <button
@@ -141,9 +141,10 @@ const TaskList = () => {
                                 onChange={(e) => setForm({ ...form, priority: parseInt(e.target.value) })}
                                 className="w-full border p-2 rounded"
                             >
-                                <option value={0}>Low</option>
-                                <option value={1}>Medium</option>
-                                <option value={2}>High</option>
+                                <option value={0}>Urgent</option>
+                                <option value={1}>Important</option>
+                                <option value={2}>Normal</option>
+                                <option value={3}>Suggestive</option>
                             </select>
                             <button
                                 type="submit"
