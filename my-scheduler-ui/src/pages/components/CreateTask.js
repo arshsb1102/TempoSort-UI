@@ -96,6 +96,7 @@ const CreateTask = () => {
                                     required
                                     className="w-full border p-2 rounded"
                                 />
+                                
                                 <select
                                     name="priority"
                                     value={form.priority}
