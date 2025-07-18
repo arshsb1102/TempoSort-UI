@@ -30,7 +30,7 @@ export default function SettingsModal({ isOpen, onClose }) {
 
     const handleSave = async () => {
         const token = localStorage.getItem('token');
-        await axios.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/preferences`, {
+        await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/user/preferences`, {
             isDigestEnabled: digestEnabled,
         }, {
             headers: {
@@ -55,14 +55,12 @@ export default function SettingsModal({ isOpen, onClose }) {
                             <Switch
                                 checked={digestEnabled}
                                 onChange={setDigestEnabled}
-                                className={`${
-                                    digestEnabled ? 'bg-blue-600' : 'bg-gray-300'
-                                } relative inline-flex h-6 w-11 items-center rounded-full`}
+                                className={`${digestEnabled ? 'bg-blue-600' : 'bg-gray-300'
+                                    } relative inline-flex h-6 w-11 items-center rounded-full`}
                             >
                                 <span
-                                    className={`${
-                                        digestEnabled ? 'translate-x-6' : 'translate-x-1'
-                                    } inline-block h-4 w-4 transform bg-white rounded-full transition`}
+                                    className={`${digestEnabled ? 'translate-x-6' : 'translate-x-1'
+                                        } inline-block h-4 w-4 transform bg-white rounded-full transition`}
                                 />
                             </Switch>
                         </div>
