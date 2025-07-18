@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { jwtDecode } from "jwt-decode";
 import TaskList from './components/TaskList';
 import CreateTask from './components/CreateTask';
+import NavBar from './components/NavBar';
 
 export default function HomePage() {
     const [name, setName] = useState('');
@@ -17,6 +18,7 @@ export default function HomePage() {
 
     return (
         <>
+            <NavBar />
             <div className="my-5 flex items-center justify-center text-xl font-semibold">
                 <p>Hi {name || 'there'} 👋</p>
             </div>
