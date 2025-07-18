@@ -48,7 +48,10 @@ const NavBar = () => {
                     </button>
                 </div>
             </nav>
-            <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+            <SettingsModal
+                isOpen={isSettingsOpen}
+                onClose={() => setIsSettingsOpen(false)}
+            />
         </>
     );
 }

@@ -4,7 +4,10 @@ import { Switch } from '@headlessui/react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
-export default function SettingsModal({ isOpen, onClose }) {
+export default function SettingsModal({
+    isOpen = false,
+    onClose = () => { }
+}) {
     const [digestEnabled, setDigestEnabled] = useState(false);
     const [digestTime, setDigestTime] = useState('09:00'); // default local time
     const [loading, setLoading] = useState(true);
