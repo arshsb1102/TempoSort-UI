@@ -19,6 +19,7 @@ export default function SettingsModal({ isOpen, onClose }) {
                     });
                     setDigestEnabled(res.data.isDigestEnabled);
                 } catch (err) {
+                    onClose();
                     console.error("Failed to fetch user settings", err);
                 } finally {
                     setLoading(false);
