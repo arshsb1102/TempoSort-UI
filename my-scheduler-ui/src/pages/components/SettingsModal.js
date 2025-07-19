@@ -3,6 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { Switch } from '@headlessui/react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
+import ConfirmDelete from './confirm-delete';
 
 export default function SettingsModal({
     isOpen = false,
@@ -11,6 +12,7 @@ export default function SettingsModal({
     const [digestEnabled, setDigestEnabled] = useState(false);
     const [digestTime, setDigestTime] = useState('09:00'); // default local time
     const [loading, setLoading] = useState(true);
+    const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
         if (isOpen) {
@@ -62,72 +64,89 @@ export default function SettingsModal({
     });
 
     return (
-        <Dialog open={isOpen} onClose={onClose} className="relative z-50">
-            <div className="fixed inset-0 bg-black/30 dark:bg-black/60" aria-hidden="true" />
-            <div className="fixed inset-0 flex items-center justify-center p-4">
-                <Dialog.Panel className="bg-white dark:bg-gray-800 dark:text-white rounded-2xl p-6 w-full max-w-md shadow-xl">
-                    <Dialog.Title className="text-lg font-bold mb-4">User Settings</Dialog.Title>
+        <>
+            <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+                <div className="fixed inset-0 bg-black/30 dark:bg-black/60" aria-hidden="true" />
+                <div className="fixed inset-0 flex items-center justify-center p-4">
+                    <Dialog.Panel className="bg-white dark:bg-gray-800 dark:text-white rounded-2xl p-6 w-full max-w-md shadow-xl">
+                        <Dialog.Title className="text-lg font-bold mb-4">User Settings</Dialog.Title>
 
-                    {loading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <>
-                            <div className="flex items-center justify-between mb-4">
-                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                    Daily Digest
-                                </span>
-                                <Switch
-                                    checked={digestEnabled}
-                                    onChange={setDigestEnabled}
-                                    className={`${
-                                        digestEnabled ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
-                                    } relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300`}
-                                >
-                                    <span
-                                        className={`${
-                                            digestEnabled ? 'translate-x-6' : 'translate-x-1'
-                                        } inline-block h-4 w-4 transform bg-white rounded-full transition`}
-                                    />
-                                </Switch>
-                            </div>
-
-                            {digestEnabled && (
-                                <div className="mb-4">
-                                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                        Digest Time (your local time)
-                                    </label>
-                                    <select
-                                        value={digestTime}
-                                        onChange={(e) => setDigestTime(e.target.value)}
-                                        className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white rounded-md px-3 py-2"
+                        {loading ? (
+                            <p>Loading...</p>
+                        ) : (
+                            <>
+                                <div className="flex items-center justify-between mb-4">
+                                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Daily Digest
+                                    </span>
+                                    <Switch
+                                        checked={digestEnabled}
+                                        onChange={setDigestEnabled}
+                                        className={`${digestEnabled ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'
+                                            } relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300`}
                                     >
-                                        {timeOptions.map((time) => (
-                                            <option key={time} value={time}>
-                                                {time}
-                                            </option>
-                                        ))}
-                                    </select>
+                                        <span
+                                            className={`${digestEnabled ? 'translate-x-6' : 'translate-x-1'
+                                                } inline-block h-4 w-4 transform bg-white rounded-full transition`}
+                                        />
+                                    </Switch>
                                 </div>
-                            )}
-                        </>
-                    )}
 
-                    <div className="mt-6 flex justify-end gap-2">
-                        <button
-                            onClick={onClose}
-                            className="text-gray-600 dark:text-gray-300 px-4 py-2 hover:underline"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            onClick={handleSave}
-                            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        >
-                            Save
-                        </button>
-                    </div>
-                </Dialog.Panel>
-            </div>
-        </Dialog>
+                                {digestEnabled && (
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                            Digest Time (your local time)
+                                        </label>
+                                        <select
+                                            value={digestTime}
+                                            onChange={(e) => setDigestTime(e.target.value)}
+                                            className="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white rounded-md px-3 py-2"
+                                        >
+                                            {timeOptions.map((time) => (
+                                                <option key={time} value={time}>
+                                                    {time}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                )}
+                            </>
+                        )}
+
+                        <div className="mt-6 flex justify-end gap-2">
+                            <button
+                                onClick={onClose}
+                                className="text-gray-600 dark:text-gray-300 px-4 py-2 hover:underline"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleSave}
+                                className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                            >
+                                Save
+                            </button>
+                        </div>
+                        <div className='my-2'>
+                            <button
+                                onClick={() => {
+                                    onClose();
+                                    setShowDelete(!showDelete)
+                                }}
+                                className="px-4 py-2 w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 disabled:opacity-60"
+                            >
+                                Delete My Account
+                            </button>
+                        </div>
+                    </Dialog.Panel>
+                </div>
+            </Dialog>
+            {
+                showDelete &&
+                <ConfirmDelete
+                    goBack={() => setShowDelete(!showDelete)}
+                />
+            }
+        </>
     );
 }
