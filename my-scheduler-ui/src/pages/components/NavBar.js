@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Settings } from 'lucide-react';
@@ -33,12 +32,12 @@ const NavBar = () => {
 
     return (
         <>
-            <nav className="bg-gray-100 px-6 py-3 flex justify-between items-center shadow-md">
-                <div className="text-xl font-bold text-blue-600">TempoSort</div>
+            <nav className="bg-gray-100 dark:bg-gray-900 px-6 py-3 flex justify-between items-center shadow-md">
+                <div className="text-xl font-bold text-blue-600 dark:text-blue-400">TempoSort</div>
                 <div className="flex items-center gap-4">
                     <Settings
                         onClick={() => setIsSettingsOpen(true)}
-                        className="h-5 w-5 text-gray-600 hover:text-gray-800 cursor-pointer"
+                        className="h-5 w-5 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-white cursor-pointer"
                     />
                     <button
                         onClick={handleLogout}
@@ -56,4 +55,4 @@ const NavBar = () => {
     );
 }
 
-export default NavBar
+export default NavBar;

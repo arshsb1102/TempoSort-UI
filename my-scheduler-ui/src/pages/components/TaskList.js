@@ -74,13 +74,13 @@ const TaskList = () => {
                 <p>No tasks found.</p>
             ) : (
                 tasks.map((task) => (
-                    <div key={task.id} className="bg-white shadow p-4 rounded-2xl relative">
+                    <div key={task.id} className="bg-white dark:bg-gray-800 dark:text-white shadow p-4 rounded-2xl relative">
                         <h2 className="text-xl font-bold">{task.title}</h2>
-                        <p className="text-gray-600 mb-2">{task.description}</p>
+                        <p className="text-gray-600 dark:text-gray-300 mb-2">{task.description}</p>
                         <p className="text-sm text-blue-500">
                             Due: {new Date(task.dueAt).toLocaleString()}
                         </p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
                             Priority: {["Urgent", "Important", "Normal", "Suggestive"][task.priority]}
                         </p>
                         <div className="mt-4 flex gap-2">
@@ -104,10 +104,10 @@ const TaskList = () => {
             {/* Edit Modal */}
             {editingTask && (
                 <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-                    <div className="bg-white p-6 rounded-2xl w-full max-w-md shadow-lg relative">
+                    <div className="bg-white dark:bg-gray-800 dark:text-white p-6 rounded-2xl w-full max-w-md shadow-lg relative">
                         <button
                             onClick={() => setEditingTask(null)}
-                            className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-xl"
+                            className="absolute top-2 right-3 text-gray-500 hover:text-red-500 dark:hover:text-red-400 text-xl"
                         >
                             &times;
                         </button>
@@ -117,14 +117,14 @@ const TaskList = () => {
                                 name="title"
                                 value={form.title}
                                 onChange={(e) => setForm({ ...form, title: e.target.value })}
-                                className="w-full border p-2 rounded"
+                                className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                                 required
                             />
                             <textarea
                                 name="description"
                                 value={form.description}
                                 onChange={(e) => setForm({ ...form, description: e.target.value })}
-                                className="w-full border p-2 rounded"
+                                className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                                 required
                             />
                             <input
@@ -132,14 +132,14 @@ const TaskList = () => {
                                 type="datetime-local"
                                 value={form.dueAt}
                                 onChange={(e) => setForm({ ...form, dueAt: e.target.value })}
-                                className="w-full border p-2 rounded"
+                                className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                                 required
                             />
                             <select
                                 name="priority"
                                 value={form.priority}
                                 onChange={(e) => setForm({ ...form, priority: parseInt(e.target.value) })}
-                                className="w-full border p-2 rounded"
+                                className="w-full border p-2 rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                             >
                                 <option value={0}>Urgent</option>
                                 <option value={1}>Important</option>
@@ -160,7 +160,7 @@ const TaskList = () => {
             {/* Delete Confirmation Modal */}
             {deletingTaskId && (
                 <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
-                    <div className="bg-white p-6 rounded-xl shadow-lg text-center max-w-sm w-full">
+                    <div className="bg-white dark:bg-gray-800 dark:text-white p-6 rounded-xl shadow-lg text-center max-w-sm w-full">
                         <p className="text-lg font-semibold mb-4">
                             Are you sure you want to delete this task?
                         </p>
@@ -173,7 +173,7 @@ const TaskList = () => {
                             </button>
                             <button
                                 onClick={() => setDeletingTaskId(null)}
-                                className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                                className="bg-gray-300 text-gray-800 dark:bg-gray-600 dark:text-gray-200 hover:bg-gray-400 hover:dark:bg-gray-500 px-4 py-2 rounded"
                             >
                                 Cancel
                             </button>

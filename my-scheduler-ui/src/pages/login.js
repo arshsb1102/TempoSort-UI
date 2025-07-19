@@ -27,12 +27,12 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="flex h-screen items-center justify-center bg-gray-100">
+        <div className="flex h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
             <form
                 onSubmit={handleLogin}
-                className="bg-white p-8 rounded shadow-md w-full max-w-md space-y-4"
+                className="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-full max-w-md space-y-4"
             >
-                <h2 className="text-2xl font-semibold text-center">Login</h2>
+                <h2 className="text-2xl font-semibold text-center dark:text-gray-100">Login</h2>
                 {error && <p className="text-red-500 text-sm">{error}</p>}
 
                 <input
@@ -40,7 +40,7 @@ export default function LoginPage() {
                     placeholder="Email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-2 border rounded"
+                    className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                     required
                 />
 
@@ -49,17 +49,16 @@ export default function LoginPage() {
                     placeholder="Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-4 py-2 border rounded"
+                    className="w-full px-4 py-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"
                     required
                 />
                 <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="text-sm text-blue-500 ml-2"
+                    className="text-sm text-blue-500 dark:text-blue-400 ml-2"
                 >
                     {showPassword ? "Hide" : "Show"}
                 </button>
-
 
                 <button
                     type="submit"
@@ -67,9 +66,9 @@ export default function LoginPage() {
                 >
                     Log In
                 </button>
-                <p className="text-sm text-center">
+                <p className="text-sm text-center dark:text-gray-300">
                     Dont have an account?{' '}
-                    <a href="/signup" className="text-blue-600 hover:underline">
+                    <a href="/signup" className="text-blue-600 dark:text-blue-400 hover:underline">
                         Sign Up
                     </a>
                 </p>

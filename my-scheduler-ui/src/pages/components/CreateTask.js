@@ -62,14 +62,14 @@ const CreateTask = () => {
             {
                 showModal && (
                     <div className="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50">
-                        <div className="bg-white p-6 rounded-2xl w-full max-w-md shadow-lg relative">
+                        <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl w-full max-w-md shadow-lg relative">
                             <button
                                 onClick={() => setShowModal(false)}
-                                className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-xl"
+                                className="absolute top-2 right-3 text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-red-400 text-xl"
                             >
                                 &times;
                             </button>
-                            <h2 className="text-xl font-semibold mb-4">New Task</h2>
+                            <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">New Task</h2>
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <input
                                     name="title"
@@ -78,7 +78,7 @@ const CreateTask = () => {
                                     value={form.title}
                                     onChange={handleChange}
                                     required
-                                    className="w-full border p-2 rounded"
+                                    className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-white p-2 rounded"
                                 />
                                 <textarea
                                     name="description"
@@ -86,7 +86,7 @@ const CreateTask = () => {
                                     value={form.description}
                                     onChange={handleChange}
                                     required
-                                    className="w-full border p-2 rounded"
+                                    className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-white p-2 rounded"
                                 />
                                 <input
                                     name="dueAt"
@@ -94,14 +94,14 @@ const CreateTask = () => {
                                     value={form.dueAt}
                                     onChange={handleChange}
                                     required
-                                    className="w-full border p-2 rounded"
+                                    className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-white p-2 rounded"
                                 />
-                                
+
                                 <select
                                     name="priority"
                                     value={form.priority}
                                     onChange={handleChange}
-                                    className="w-full border p-2 rounded"
+                                    className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-black dark:text-white p-2 rounded"
                                 >
                                     <option value={0}>Urgent</option>
                                     <option value={1}>Important</option>
